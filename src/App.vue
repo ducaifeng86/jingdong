@@ -1,30 +1,57 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <footer class="tabbar">
+    <div class="tabbar__item tabbar__item--active">
+      <i class="iconfont">&#xe7c6;</i>
+      <span class="tabbar__text">首页</span>
+    </div>
+    <div class="tabbar__item">
+      <i class="iconfont">&#xe881;</i>
+      <span class="tabbar__text">购物车</span>
+    </div>
+    <div class="tabbar__item">
+      <i class="iconfont">&#xe713;</i>
+      <span class="tabbar__text">订单</span>
+    </div>
+    <div class="tabbar__item">
+      <i class="iconfont">&#xe600;</i>
+      <span class="tabbar__text">我的</span>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  .tabbar {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 .18rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.49rem;
+    border-top: 1px solid #F1F1F1;
 
-nav {
-  padding: 30px;
+    &__item {
+      display: flex;
+      flex-flow: column;
+      flex: 1;
+      text-align: center;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+      .iconfont {
+        margin: .06rem 0 .02rem 0;
+        font-size: .18rem;
+      }
 
-    &.router-link-exact-active {
-      color: #42b983;
+      .tabbar__text {
+        font-size: .2rem;
+        transform: scale(.5,.5);
+        transform-origin: center top;
+      }
+
+      &--active {
+        color: #1FA4FC;
+      }
     }
   }
-}
+
 </style>
