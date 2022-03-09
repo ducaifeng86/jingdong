@@ -1,27 +1,26 @@
 <template>
   <footer class="tabbar">
-    <div class="tabbar__item tabbar__item--active">
-      <i class="iconfont">&#xe7c6;</i>
-      <span class="tabbar__text">首页</span>
-    </div>
-    <div class="tabbar__item">
-      <i class="iconfont">&#xe881;</i>
-      <span class="tabbar__text">购物车</span>
-    </div>
-    <div class="tabbar__item">
-      <i class="iconfont">&#xe713;</i>
-      <span class="tabbar__text">订单</span>
-    </div>
-    <div class="tabbar__item">
-      <i class="iconfont">&#xe600;</i>
-      <span class="tabbar__text">我的</span>
+    <div v-for="(item,index) in tabbarList" :class="{'tabbar__item':true,'tabbar__item--active': index === 0}" :key="item.icon">
+      <i class="iconfont" v-html="item.icon"></i>
+      <span class="tabbar__text">{{item.text}}</span>
     </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'TabbarNav'
+  name: 'TabbarNav',
+  setup () {
+    const tabbarList = [
+      { icon: '&#xe7c6;', text: '首页' },
+      { icon: '&#xe881;', text: '购物车' },
+      { icon: '&#xe713;', text: '订单' },
+      { icon: '&#xe600;', text: '我的' }
+    ]
+    return {
+      tabbarList
+    }
+  }
 }
 </script>
 <style lang="scss">
