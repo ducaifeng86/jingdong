@@ -6,7 +6,7 @@
     </div>
     <div class="search">
       <i class="iconfont">&#xe6e1;</i>
-      <span>山姆会员优化圈</span>
+      <span class="search__text">山姆会员优化圈</span>
     </div>
     <div class="banner">
       <img class="banner__img" src="http://www.dell-lee.com/imgs/vue3/banner.jpg"/>
@@ -69,6 +69,7 @@ export default {
   }
 
   .search {
+    display:flex;
     margin-bottom: .12rem;
     line-height: .32rem;
     background-color: #F5F5F5;
@@ -77,9 +78,6 @@ export default {
     font-size: .14rem;
 
     .iconfont {
-      position: relative;
-      top: .01rem;
-      display: inline-block;
       padding: 0 0.1rem 0 0.12rem;
       font-size: .2rem;
     }
