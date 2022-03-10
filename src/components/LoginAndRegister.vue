@@ -1,17 +1,20 @@
 <template>
-  <LoginAndRegister>
-    <div class="wrapper__btn" @click="handleLogin">登录</div>
-    <div class="wrapper__login-link">立即注册</div>
-  </LoginAndRegister>
+  <section class="wrapper">
+    <img src="http://www.dell-lee.com/imgs/vue3/near.png" class="wrapper__img" />
+    <div class="wrapper__div">
+      <input class="wrapper__div__input" placeholder="请输入手机号"/>
+    </div>
+    <div class="wrapper__div">
+      <input class="wrapper__div__input" placeholder="请输入密码"/>
+    </div>
+    <slot></slot>
+  </section>
 </template>
 
 <script>
-import LoginAndRegister from '../../components/LoginAndRegister'
 import { useRouter } from 'vue-router'
 export default {
-  components: {
-    LoginAndRegister
-  },
+  name: 'LoginAndRegister',
   setup () {
     const router = useRouter()
     const handleLogin = () => {
@@ -26,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../style/viriables.scss';
+  @import '../style/viriables.scss';
   .wrapper {
     position: absolute;
     top: 50%;
