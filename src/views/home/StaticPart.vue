@@ -1,7 +1,7 @@
 <template>
     <div class="position">
       <i class="iconfont position__icon">&#xe619;</i>
-      北京理工大学
+      <span class="position__text">北京理工大学北京理工大学北京理工大学北京理工大学</span>
       <i class="iconfont position__notice">&#xe8ae;</i>
     </div>
     <div class="search">
@@ -41,26 +41,27 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../../style/viriables.scss';
   @import '../../style/mixins.scss';
   .position {
-    position: relative;
-    padding: .16rem .24rem .16rem 0;
+    display: flex;
+    padding: .16rem 0;
     line-height: .22rem;
     font-size: .16rem;
-    @include ellipsis;
 
     .position__icon {
-      position: relative;
       top: .01rem;
       font-size: .2rem;
     }
 
+    .position__text {
+      flex:1;
+      padding:0 .1rem;
+      @include ellipsis;
+    }
+
     .position__notice {
-      position: absolute;
-      top: .17rem;
-      right: 0;
       font-size: .2rem;
     }
 
