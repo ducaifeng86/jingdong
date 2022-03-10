@@ -1,7 +1,7 @@
 <template>
   <LoginAndRegister>
     <div class="wrapper__btn" @click="handleLogin">登录</div>
-    <div class="wrapper__login-link">立即注册</div>
+    <div class="wrapper__link">立即注册</div>
   </LoginAndRegister>
 </template>
 
@@ -75,7 +75,7 @@ export default {
       text-align: center;
     }
 
-    .wrapper__login-link {
+    .wrapper__link {
       text-align: center;
       font-size: .14rem;
       color: $content-notice-fontcolor;

@@ -1,35 +1,34 @@
 <template>
-  <section class="wrapper">
-    <img src="http://www.dell-lee.com/imgs/vue3/near.png" class="wrapper__img" />
+  <LoginAndRegister>
     <div class="wrapper__div">
-      <input class="wrapper__div__input" placeholder="请输入手机号"/>
+      <input class="wrapper__div__input" type="password" placeholder="确认密码" />
     </div>
-    <div class="wrapper__div">
-      <input class="wrapper__div__input" type="password" placeholder="请输入密码"/>
-    </div>
-    <slot></slot>
-  </section>
+    <div class="wrapper__btn" >注册</div>
+    <div class="wrapper__link" @click="handleLoginClick">已有账号，立即登录</div>
+  </LoginAndRegister>
 </template>
 
 <script>
+import LoginAndRegister from '../../components/LoginAndRegister'
 import { useRouter } from 'vue-router'
 export default {
-  name: 'LoginAndRegister',
+  components: {
+    LoginAndRegister
+  },
   setup () {
     const router = useRouter()
-    const handleLogin = () => {
-      localStorage.isLogin = true
-      router.push({ name: 'home' })
+    const handleLoginClick = () => {
+      router.push({ name: 'login' })
     }
     return {
-      handleLogin
+      handleLoginClick
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '../style/viriables.scss';
+  @import '../../style/viriables.scss';
   .wrapper {
     position: absolute;
     top: 50%;
@@ -78,7 +77,7 @@ export default {
       text-align: center;
     }
 
-    .wrapper__login-link {
+    .wrapper__link {
       text-align: center;
       font-size: .14rem;
       color: $content-notice-fontcolor;
