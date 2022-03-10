@@ -2,27 +2,30 @@
   <section class="wrapper">
     <img src="http://www.dell-lee.com/imgs/vue3/near.png" class="wrapper__img" />
     <div class="wrapper__div">
-      <input class="wrapper__div__input" placeholder="请输入手机号"/>
+      <input class="wrapper__div__input" placeholder="请输入手机号" v-model="userdata.username"/>
     </div>
     <div class="wrapper__div">
-      <input class="wrapper__div__input" type="password" placeholder="请输入密码"/>
+      <input class="wrapper__div__input" type="password" placeholder="请输入密码" v-model="userdata.password"/>
     </div>
-    <slot></slot>
+    <slot :userdata="userdata"></slot>
   </section>
 </template>
 
 <script>
 import { useRouter } from 'vue-router'
+import { reactive } from 'vue'
 export default {
   name: 'LoginAndRegister',
   setup () {
+    const userdata = reactive({ username: '', password: '' })
     const router = useRouter()
     const handleLogin = () => {
       localStorage.isLogin = true
       router.push({ name: 'home' })
     }
     return {
-      handleLogin
+      handleLogin,
+      userdata
     }
   }
 }

@@ -1,22 +1,34 @@
 <template>
   <LoginAndRegister>
-    <div class="wrapper__btn" @click="handleLogin">登录</div>
-    <div class="wrapper__link">立即注册</div>
+    <template  v-slot="slotProps">
+      <div class="wrapper__btn" @click="handleLogin(slotProps)">登录</div>
+      <div class="wrapper__link">立即注册</div>
+    </template>
   </LoginAndRegister>
 </template>
 
 <script>
 import LoginAndRegister from '../../components/LoginAndRegister'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 export default {
   components: {
     LoginAndRegister
   },
   setup () {
     const router = useRouter()
-    const handleLogin = () => {
-      localStorage.isLogin = true
-      router.push({ name: 'home' })
+    const handleLogin = (data) => {
+      axios.post('https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/login',
+        {
+          usrname: data.username,
+          password: data.password
+        }).then(() => {
+        localStorage.isLogin = true
+        router.push({ name: 'home' })
+      }).catch(() => {
+        alert('登录失败')
+      })
     }
     return {
       handleLogin
