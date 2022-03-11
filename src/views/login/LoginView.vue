@@ -1,26 +1,32 @@
 <template>
   <LoginAndRegister>
-    <template  v-slot="slotProps">
+    <template v-slot="slotProps">
       <div class="wrapper__btn" @click="handleLogin(slotProps)">登录</div>
       <div class="wrapper__link">立即注册</div>
     </template>
   </LoginAndRegister>
+  <Toast :show="show" :msg="msg" />
 </template>
 
 <script>
 import LoginAndRegister from '../../components/LoginAndRegister'
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/request.js'
+import { reactive, toRefs } from 'vue'
+import Toast from '../../components/ToastComponent'
 
 export default {
   components: {
-    LoginAndRegister
+    LoginAndRegister,
+    Toast
   },
   setup () {
     const router = useRouter()
+    const toastData = reactive({ show: false, msg: '' })
+    const { show, msg } = toRefs(toastData)
     const handleLogin = async (data) => {
       try {
-        const result = await post('/api/user/login',
+        const result = await post('/api/user/login8',
           {
             usrname: data.username,
             password: data.password
@@ -29,14 +35,26 @@ export default {
           localStorage.isLogin = true
           router.push({ name: 'home' })
         } else {
-          alert('登录失败')
+          toastData.show = true
+          toastData.msg = result.desc
+          setTimeout(() => {
+            toastData.show = false
+            toastData.msg = ''
+          }, 2000)
         }
       } catch {
-        alert('请求失败')
+        toastData.show = true
+        toastData.msg = '请求失败'
+        setTimeout(() => {
+          toastData.show = false
+          toastData.msg = ''
+        }, 2000)
       }
     }
     return {
-      handleLogin
+      handleLogin,
+      show,
+      msg
     }
   }
 }
