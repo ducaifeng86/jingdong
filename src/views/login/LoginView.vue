@@ -9,48 +9,61 @@
 </template>
 
 <script>
-import LoginAndRegister from '../../components/LoginAndRegister'
+import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/request.js'
-import { reactive, toRefs } from 'vue'
+import LoginAndRegister from '../../components/LoginAndRegister'
 import Toast from '../../components/ToastComponent'
 
+// 提示相关的逻辑
+const useToastEffect = () => {
+  const toastData = reactive({ show: false, msg: '' })
+  const showToast = (msg) => {
+    toastData.show = true
+    toastData.msg = msg
+    setTimeout(() => {
+      toastData.show = false
+      toastData.msg = ''
+    }, 2000)
+  }
+  return {
+    toastData,
+    showToast
+  }
+}
+// 登录相关的逻辑
+const handleLoginEffect = (showToast) => {
+  const router = useRouter()
+  const handleLogin = async (data) => {
+    try {
+      const result = await post('/api/user/login8',
+        {
+          usrname: data.username,
+          password: data.password
+        })
+      if (result.errno === 0) {
+        localStorage.isLogin = true
+        router.push({ name: 'home' })
+      } else {
+        showToast(result.desc)
+      }
+    } catch {
+      showToast('请求失败')
+    }
+  }
+  return {
+    handleLogin
+  }
+}
 export default {
   components: {
     LoginAndRegister,
     Toast
   },
   setup () {
-    const router = useRouter()
-    const toastData = reactive({ show: false, msg: '' })
+    const { toastData, showToast } = useToastEffect()
+    const { handleLogin } = handleLoginEffect(showToast)
     const { show, msg } = toRefs(toastData)
-    const handleLogin = async (data) => {
-      try {
-        const result = await post('/api/user/login8',
-          {
-            usrname: data.username,
-            password: data.password
-          })
-        if (result.errno === 0) {
-          localStorage.isLogin = true
-          router.push({ name: 'home' })
-        } else {
-          toastData.show = true
-          toastData.msg = result.desc
-          setTimeout(() => {
-            toastData.show = false
-            toastData.msg = ''
-          }, 2000)
-        }
-      } catch {
-        toastData.show = true
-        toastData.msg = '请求失败'
-        setTimeout(() => {
-          toastData.show = false
-          toastData.msg = ''
-        }, 2000)
-      }
-    }
     return {
       handleLogin,
       show,
