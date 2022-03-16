@@ -4,9 +4,11 @@
     "\\src",
     "\\src\\components",
     "\\src\\router",
+    "\\src\\utils",
     "\\src\\views",
-    "\\src\\views\\register"
+    "\\src\\views\\home",
+    "\\src\\views\\shop"
   ],
-  "SelectedNode": "\\src\\components\\LoginAndRegister.vue",
+  "SelectedNode": "\\src\\router\\index.js",
   "PreviewInSolutionExplorer": false
 }
