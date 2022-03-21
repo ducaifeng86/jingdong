@@ -36,7 +36,7 @@ const handleLoginEffect = (showToast) => {
   const router = useRouter()
   const handleLogin = async (data) => {
     try {
-      const result = await post('/api/user/login8',
+      const result = await post('/api/user/login',
         {
           usrname: data.username,
           password: data.password

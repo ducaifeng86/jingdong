@@ -99,19 +99,18 @@ export default {
     margin-top: .16rem;
 
     &__item {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
       width: 20%;
 
       &__img {
-        display: block;
-        margin: 0 auto;
         width: .4rem;
         height: .4rem;
       }
 
       &__desc {
-        display: block;
         margin: .06rem 0 .16rem 0;
-        text-align: center;
         color: $content-fontcolor;
       }
     }
